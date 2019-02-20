@@ -10,6 +10,28 @@ CryptoForm relies on [OpenPGP.js](https://openpgpjs.org/) for cryptography. All 
 
 ---
 
+## Install
+
+Tested on the following version
+
+- node 8.10.0
+- elm 0.18.0
+  - npm -g install elm@0.18.0
+
+```
+# Clone project
+npm install
+npm install elm-github-install -g
+cd app/elm
+elm-install
+cd ../..
+npm run start
+```
+
+Since the `outofboundstech/file-reader` is on github, we must install it using `elm-github-install`. But the `elm-package.json` is located in `app/elm`. So any attempt to run `elm-install` in the project root will result in error during `npm run start`: `Your .elm/packages directory is corrupted`
+
+---
+
 ## No License
 
 I'm still working out which license is the best fit for CryptoForm. Do you have advice for me on how to [choose a license](https://choosealicense.com/)? Please [get in touch](https://github.com/outofboundstech/CryptoForm/issues/1). In the meantime, read up on the '[no license](https://choosealicense.com/no-license/)' license.
