@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var app = Elm.Main.embed(node,
     { anonymous: false
-    , baseUrl: "https://103.104.244.68/api/"
+    , baseUrl: "https://cryptoform.freepressunlimited.org/api/"
     , defaultEmail: "anonymous@451labs.org"
     , defaultName: "John Doe"
     , defaultSubject: ""
