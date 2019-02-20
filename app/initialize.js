@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var app = Elm.Main.embed(node,
     { anonymous: false
-    , baseUrl: "https://keyserv.herokuapp.com/api/" // "http://localhost:4000/api/"
+    , baseUrl: "http://103.104.244.68/api/"
     , defaultEmail: "anonymous@451labs.org"
     , defaultName: "John Doe"
     , defaultSubject: ""
