@@ -8,8 +8,10 @@
     "url": "https://github.com/outofboundstech/cryptoform.git"
   },
   "scripts": {
+    "nvm": "nvm use 8.11.0",
     "start": "brunch watch --server",
-    "build": "brunch build --production"
+    "build": "brunch build --production",
+    "publish": "npm run build && cp -r public/* docs"
   },
   "dependencies": {
     "elm-brunch": "^0.10.0"
