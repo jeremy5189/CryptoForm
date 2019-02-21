@@ -33,6 +33,9 @@ type Descriptor
   | Support String
   | References String
   | Legaldoc String
+  -- Contact
+  | ContactMethod String
+  | PublishStory String
 
 
 
@@ -54,6 +57,9 @@ type Model = Model
   , support : String
   , references : String
   , legaldoc : String
+  -- Contact
+  , contactMethod : String
+  , publishStory : String
   }
 
 
@@ -92,6 +98,11 @@ update desc (Model model) =
       Model { model | references = val }
     Legaldoc val ->
       Model { model | legaldoc = val }
+    -- Contact
+    ContactMethod val ->
+      Model { model | contactMethod = val }
+    PublishStory val ->
+      Model { model | publishStory = val }
 
 
 view : Model -> Html Descriptor
@@ -307,6 +318,7 @@ view ( Model model ) =
           , type_ "radio"
           , value "E-mail"
           , name "contactMethod"
+          , onInput ContactMethod
           ] [ ]
         , label [ ] [ text "E-mail" ]
         , br [ ] [ ]
@@ -316,6 +328,7 @@ view ( Model model ) =
           , type_ "radio"
           , value "Encrypted e-mail"
           , name "contactMethod"
+          , onInput ContactMethod
           ] [ ]
         , label [ ] [ text "Encrypted e-mail (please add your public key)" ]
         , br [ ] [ ]
@@ -325,6 +338,7 @@ view ( Model model ) =
           , type_ "radio"
           , value "Wire"
           , name "contactMethod"
+          , onInput ContactMethod
           ] [ ]
         , label [ ] [ text "Wire" ]
         , br [ ] [ ]
@@ -334,6 +348,7 @@ view ( Model model ) =
           , type_ "radio"
           , value "Signal"
           , name "contactMethod"
+          , onInput ContactMethod
           ] [ ]
         , label [ ] [ text "Signal" ]
         ]
@@ -350,6 +365,7 @@ view ( Model model ) =
           , type_ "radio"
           , value "No"
           , name "publishStory"
+          , onInput PublishStory
           ] [ ]
         , label [ ] [ text "No" ]
         , br [ ] [ ]
@@ -359,6 +375,7 @@ view ( Model model ) =
           , type_ "radio"
           , value "Yes"
           , name "publishStory"
+          , onInput PublishStory
           ] [ ]
         , label [ ] [ text "Yes" ]
         ]
@@ -386,6 +403,9 @@ init = Model
   , support = ""
   , references = ""
   , legaldoc = ""
+  -- Contact
+  , contactMethod = ""
+  , publishStory = ""
   }
 
 
@@ -405,6 +425,8 @@ ready ( Model model ) =
   && (String.length model.support) /= 0
   && (String.length model.references) /= 0
   && (String.length model.legaldoc) /= 0
+  && (String.length model.contactMethod) /= 0
+  && (String.length model.publishStory) /= 0
 
 
 serialize : Model -> String
@@ -427,4 +449,7 @@ serialize ( Model model ) =
     , "**Has applied for support from other organisations?**", crlf, model.support, crlf, crlf
     , "**At least two references that can confirm the story**", crlf, model.references, crlf, crlf
     , "**Legal documents**", crlf, model.legaldoc, crlf, crlf
+    -- Contact
+    , "**Contact Method**", crlf, model.contactMethod, crlf, crlf
+    , "**Safe to Publish Story?**", crlf, model.publishStory, crlf, crlf
     ]
