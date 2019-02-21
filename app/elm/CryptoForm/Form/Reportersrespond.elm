@@ -296,6 +296,74 @@ view ( Model model ) =
         ]
       ]
     ]
+  , fieldset [ class "form-group" ]
+    [ div [ class "row" ]
+      [ div [ class "col-sm"]
+        [ label [ for "contactMethodRadio" ] [ text "Notice that all the information that you have submitted is sent through our secure, (SSL) encrypted channel. Please choose how you like to be contacted by us:" ]
+        , br [ ] [ ]
+        , input
+          [ class "form-radio"
+          , style [ ("margin", "0 10px 0 10px") ]
+          , type_ "radio"
+          , value "E-mail"
+          , name "contactMethod"
+          ] [ ]
+        , label [ ] [ text "E-mail" ]
+        , br [ ] [ ]
+        , input
+          [ class "form-radio"
+          , style [ ("margin", "0 10px 0 10px") ]
+          , type_ "radio"
+          , value "Encrypted e-mail"
+          , name "contactMethod"
+          ] [ ]
+        , label [ ] [ text "Encrypted e-mail (please add your public key)" ]
+        , br [ ] [ ]
+        , input
+          [ class "form-radio"
+          , style [ ("margin", "0 10px 0 10px") ]
+          , type_ "radio"
+          , value "Wire"
+          , name "contactMethod"
+          ] [ ]
+        , label [ ] [ text "Wire" ]
+        , br [ ] [ ]
+        , input
+          [ class "form-radio"
+          , style [ ("margin", "0 10px 0 10px") ]
+          , type_ "radio"
+          , value "Signal"
+          , name "contactMethod"
+          ] [ ]
+        , label [ ] [ text "Signal" ]
+        ]
+      ]
+    ]
+  , fieldset [ class "form-group" ]
+    [ div [ class "row" ]
+      [ div [ class "col-sm"]
+        [ label [ for "publishStoryRadio" ] [ text "Is it safe for Free Press unlimited to publish about your story? If yes, we will contact to discuss." ]
+        , br [ ] [ ]
+        , input
+          [ class "form-radio"
+          , style [ ("margin", "0 10px 0 10px") ]
+          , type_ "radio"
+          , value "No"
+          , name "publishStory"
+          ] [ ]
+        , label [ ] [ text "No" ]
+        , br [ ] [ ]
+        , input
+          [ class "form-radio"
+          , style [ ("margin", "0 10px 0 10px") ]
+          , type_ "radio"
+          , value "Yes"
+          , name "publishStory"
+          ] [ ]
+        , label [ ] [ text "Yes" ]
+        ]
+      ]
+    ]
   ]
 
 
