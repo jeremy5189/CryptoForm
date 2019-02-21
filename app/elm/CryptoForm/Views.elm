@@ -67,7 +67,7 @@ view_ model =
       [ div [ class "row" ]
         [ legend [ class "col-12" ] [ text "Basic information" ]
         , div [ class "col-sm"]
-          [ label [ for "fromInput" ] [ text "Name" ]
+          [ label [ for "fromInput" ] [ text "Full Name" ]
           , input
             [ type_ "text"
             , class "form-control"
@@ -80,7 +80,7 @@ view_ model =
             ] []
           ]
         , div [ class "col-sm" ]
-          [ label [ for "emailInput" ] [ text "E-mail address" ]
+          [ label [ for "emailInput" ] [ text "E-mail" ]
           ,  input
             [ type_ "email"
             , class "form-control"

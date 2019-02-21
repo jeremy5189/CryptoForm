@@ -32,6 +32,7 @@ type Descriptor
   | Needs String
   | Support String
   | References String
+  | Legaldoc String
 
 
 
@@ -52,6 +53,7 @@ type Model = Model
   , needs : String
   , support : String
   , references : String
+  , legaldoc : String
   }
 
 
@@ -88,6 +90,8 @@ update desc (Model model) =
       Model { model | support = val }
     References val ->
       Model { model | references = val }
+    Legaldoc val ->
+      Model { model | legaldoc = val }
 
 
 view : Model -> Html Descriptor
@@ -203,7 +207,6 @@ view ( Model model ) =
           [ id "experienceInput"
           , class "form-control"
           , value model.experience
-          , placeholder "required"
           , onInput Experience
           ] [ ]
         ]
@@ -217,7 +220,6 @@ view ( Model model ) =
           [ id "experienceInput"
           , class "form-control"
           , value model.evidence
-          , placeholder "required"
           , onInput Evidence
           ] [ ]
         ]
@@ -225,15 +227,9 @@ view ( Model model ) =
     ]
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
-      [ legend [ class "col-12" ] [ text "Application details" ]
+      [ legend [ class "col-12" ] [ text "Describe the events that resulted in your current situation" ]
       , div [ class "col-sm" ]
-        [ label [ for "reasonsInput" ]
-          [ text "What are your reasons for applying to reporters Respond?"
-          , ul [ ]
-            [ li [ ] [ text "Describe the events that resulted in your current situation" ]
-            , li [ ] [ text "Describe your current situation in some detail" ]
-            ]
-          ]
+        [ label [ for "reasonsInput" ] [ text "Describe your current situation in some detail"]
         , textarea
           [ id "reasonsInput"
           , class "form-control"
@@ -247,7 +243,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "needsInput" ] [ text "Please tell us what you need and why. Also provide a budget." ]
+        [ label [ for "needsInput" ] [ text "Please tell us what you need and why. Also provide a budget breakdown" ]
         , textarea
           [ id "needsInput"
           , class "form-control"
@@ -275,13 +271,27 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "referencesInput" ] [ text "Please provide at least two references that can confirm your story. Include contact details if possible." ]
+        [ label [ for "referencesInput" ] [ text "Please provide at least two references that can confirm your story. Include contact details" ]
         , textarea
           [ id "referencesInput"
           , class "form-control"
           , value model.references
           , placeholder "required"
           , onInput References
+          ] [ ]
+        ]
+      ]
+    ]
+  , fieldset [ class "form-group" ]
+    [ div [ class "row" ]
+      [ div [ class "col-sm"]
+        [ label [ for "legaldocInput" ] [ text "Please provide Legal documents where applicable" ]
+        , textarea
+          [ id "legaldocInput"
+          , class "form-control"
+          , value model.legaldoc
+          , placeholder "required"
+          , onInput Legaldoc
           ] [ ]
         ]
       ]
@@ -307,6 +317,7 @@ init = Model
   , needs = ""
   , support = ""
   , references = ""
+  , legaldoc = ""
   }
 
 
@@ -325,6 +336,7 @@ ready ( Model model ) =
   && (String.length model.needs) /= 0
   && (String.length model.support) /= 0
   && (String.length model.references) /= 0
+  && (String.length model.legaldoc) /= 0
 
 
 serialize : Model -> String
@@ -342,8 +354,9 @@ serialize ( Model model ) =
     , "**List of previous employers**", crlf, model.experience, crlf, crlf
     , "**Evidence of work as a media worker**", crlf, model.evidence, crlf, crlf
     -- Case information
-    , "**Reasons for applying**", crlf, model.reasons, crlf, crlf
+    , "**Current situation**", crlf, model.reasons, crlf, crlf
     , "**What he/she needs and why (incl. budget)**", crlf, model.needs, crlf, crlf
     , "**Has applied for support from other organisations?**", crlf, model.support, crlf, crlf
     , "**At least two references that can confirm the story**", crlf, model.references, crlf, crlf
+    , "**Legal documents**", crlf, model.legaldoc, crlf, crlf
     ]
