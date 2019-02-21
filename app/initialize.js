@@ -4,8 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var app = Elm.Main.embed(node,
     { anonymous: false
-    , baseUrl: "https://keyserv.herokuapp.com/api/"
-    // , baseUrl: "http://localhost:4000/api/"
+    , baseUrl: "https://cryptoform.freepressunlimited.org/api/"
     , defaultEmail: "anonymous@451labs.org"
     , defaultName: "John Doe"
     , defaultSubject: "New Reporters Respond application form submission"
