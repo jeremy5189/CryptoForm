@@ -162,7 +162,7 @@ view_ model =
               , onClick Reset
               ] [ text "Reset" ]
             , p [ if (not (ready model)) then class "text-danger" else class "d-none" ]
-              [ text "Please ill in all required fields" ]
+              [ text "Please fill in all required fields" ]
             ]
           ]
         ]
