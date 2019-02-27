@@ -139,7 +139,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "dateofBirthInput" ] [ text "Date of Birth" ]
+        [ label [ for "dateofBirthInput" ] [ text "Date of Birth(*)" ]
         , input
           [ id "dateofBirthInput"
           , class "form-control"
@@ -156,7 +156,6 @@ view ( Model model ) =
           , class "form-control"
           , type_ "text"
           , value model.sex
-          , placeholder "required"
           , onInput Sex
           ] [ ]
         ]
@@ -165,7 +164,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "nationalityInput" ] [ text "Nationality" ]
+        [ label [ for "nationalityInput" ] [ text "Nationality(*)" ]
         , input
           [ id "nationalityInput"
           , class "form-control"
@@ -176,7 +175,7 @@ view ( Model model ) =
           ] [ ]
         ]
       , div [ class "col-sm" ]
-        [ label [ for "locationInput" ] [ text "Current location" ]
+        [ label [ for "locationInput" ] [ text "Current location(*)" ]
         , input
           [ id "locationInput"
           , class "form-control"
@@ -191,7 +190,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "professionInput" ] [ text "Profession" ]
+        [ label [ for "professionInput" ] [ text "Profession(*)" ]
         , input
           [ id "professionInput"
           , class "form-control"
@@ -208,7 +207,6 @@ view ( Model model ) =
           , class "form-control"
           , type_ "text"
           , value model.workplace
-          , placeholder "required"
           , onInput Workplace
           ] [ ]
         ]
@@ -217,7 +215,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "experienceInput" ] [ text "List of previous employers:" ]
+        [ label [ for "experienceInput" ] [ text "List of current employers:" ]
         , textarea
           [ id "experienceInput"
           , class "form-control"
@@ -249,7 +247,6 @@ view ( Model model ) =
           [ id "reasonsInput"
           , class "form-control"
           , value model.reasons
-          , placeholder "required"
           , onInput Reasons
           ] [ ]
         ]
@@ -263,7 +260,6 @@ view ( Model model ) =
           [ id "needsInput"
           , class "form-control"
           , value model.needs
-          , placeholder "required"
           , onInput Needs
           ] [ ]
         ]
@@ -277,7 +273,6 @@ view ( Model model ) =
           [ id "supportInput"
           , class "form-control"
           , value model.support
-          , placeholder "required"
           , onInput Support
           ] [ ]
         ]
@@ -291,7 +286,6 @@ view ( Model model ) =
           [ id "referencesInput"
           , class "form-control"
           , value model.references
-          , placeholder "required"
           , onInput References
           ] [ ]
         ]
@@ -305,7 +299,6 @@ view ( Model model ) =
           [ id "legaldocInput"
           , class "form-control"
           , value model.legaldoc
-          , placeholder "required"
           , onInput Legaldoc
           ] [ ]
         ]
@@ -431,21 +424,18 @@ ready : Model -> Bool
 ready ( Model model ) =
   True
   && (String.length model.dateofBirth) /= 0
-  && (String.length model.sex) /= 0
   && (String.length model.nationality) /= 0
   && (String.length model.location) /= 0
   && (String.length model.profession) /= 0
-  && (String.length model.workplace) /= 0
-  && (String.length model.experience) /= 0
-  && (String.length model.reasons) /= 0
-  && (String.length model.evidence) /= 0
-  && (String.length model.needs) /= 0
-  && (String.length model.support) /= 0
-  && (String.length model.references) /= 0
-  && (String.length model.legaldoc) /= 0
-  && (String.length model.contactMethod) /= 0
-  && (String.length model.publishStory) /= 0
-  && (String.length model.pgpKey) /= 0
+  -- Textareas
+  -- && (String.length model.reasons) /= 0
+  -- && (String.length model.needs) /= 0
+  -- && (String.length model.support) /= 0
+  -- && (String.length model.references) /= 0
+  -- && (String.length model.legaldoc) /= 0
+  -- Contact methods
+  -- && (String.length model.contactMethod) /= 0
+  -- && (String.length model.publishStory) /= 0
 
 
 serialize : Model -> String
@@ -460,7 +450,7 @@ serialize ( Model model ) =
     , "**Current location**", crlf, model.location, crlf, crlf
     , "**Profession**", crlf, model.profession, crlf, crlf
     , "**Workplace**", crlf, model.workplace, crlf, crlf
-    , "**List of previous employers**", crlf, model.experience, crlf, crlf
+    , "**List of current employers**", crlf, model.experience, crlf, crlf
     , "**Evidence of work as a media worker**", crlf, model.evidence, crlf, crlf
     -- Case information
     , "**Current situation**", crlf, model.reasons, crlf, crlf
