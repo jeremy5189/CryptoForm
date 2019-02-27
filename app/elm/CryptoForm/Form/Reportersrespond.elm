@@ -36,6 +36,7 @@ type Descriptor
   -- Contact
   | ContactMethod String
   | PublishStory String
+  | PGPKey String
 
 
 
@@ -60,6 +61,7 @@ type Model = Model
   -- Contact
   , contactMethod : String
   , publishStory : String
+  , pgpKey : String
   }
 
 
@@ -103,6 +105,8 @@ update desc (Model model) =
       Model { model | contactMethod = val }
     PublishStory val ->
       Model { model | publishStory = val }
+    PGPKey val ->
+      Model { model | pgpKey = val }
 
 
 view : Model -> Html Descriptor
@@ -381,6 +385,19 @@ view ( Model model ) =
         ]
       ]
     ]
+    , fieldset [ class "form-group" ]
+    [ div [ class "row" ]
+      [ div [ class "col-sm"]
+        [ label [ for "pgpKeyInput" ] [ text "Please provide your public PGP key if applicable:" ]
+        , textarea
+          [ id "pgpKeyInput"
+          , class "form-control"
+          , value model.pgpKey
+          , onInput PGPKey
+          ] [ ]
+        ]
+      ]
+    ]
   ]
 
 
@@ -406,6 +423,7 @@ init = Model
   -- Contact
   , contactMethod = ""
   , publishStory = ""
+  , pgpKey = ""
   }
 
 
@@ -427,6 +445,7 @@ ready ( Model model ) =
   && (String.length model.legaldoc) /= 0
   && (String.length model.contactMethod) /= 0
   && (String.length model.publishStory) /= 0
+  && (String.length model.pgpKey) /= 0
 
 
 serialize : Model -> String
@@ -452,4 +471,5 @@ serialize ( Model model ) =
     -- Contact
     , "**Contact Method**", crlf, model.contactMethod, crlf, crlf
     , "**Safe to Publish Story?**", crlf, model.publishStory, crlf, crlf
+    , "**PGP Key**", crlf, model.pgpKey, crlf, crlf
     ]
