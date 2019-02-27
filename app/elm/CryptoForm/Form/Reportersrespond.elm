@@ -213,7 +213,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "experienceInput" ] [ text "List of previous employers" ]
+        [ label [ for "experienceInput" ] [ text "List of previous employers:" ]
         , textarea
           [ id "experienceInput"
           , class "form-control"
@@ -226,7 +226,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "evidenceInput" ] [ text "Provide evidence of your work as a media worker (links) or upload material underneath" ]
+        [ label [ for "evidenceInput" ] [ text "Provide evidence of your work as a media worker (links) or upload material underneath:" ]
         , textarea
           [ id "experienceInput"
           , class "form-control"
@@ -240,7 +240,7 @@ view ( Model model ) =
     [ div [ class "row" ]
       [ legend [ class "col-12" ] [ text "Describe the events that resulted in your current situation" ]
       , div [ class "col-sm" ]
-        [ label [ for "reasonsInput" ] [ text "Describe your current situation in some detail"]
+        [ label [ for "reasonsInput" ] [ text "Describe your current situation in some detail:"]
         , textarea
           [ id "reasonsInput"
           , class "form-control"
@@ -254,7 +254,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "needsInput" ] [ text "Please tell us what you need and why. Also provide a budget breakdown" ]
+        [ label [ for "needsInput" ] [ text "Please tell us what you need and why. Also provide a budget breakdown:" ]
         , textarea
           [ id "needsInput"
           , class "form-control"
@@ -282,7 +282,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "referencesInput" ] [ text "Please provide at least two references that can confirm your story. Include contact details" ]
+        [ label [ for "referencesInput" ] [ text "Please provide at least two references that can confirm your story. Include contact details:" ]
         , textarea
           [ id "referencesInput"
           , class "form-control"
@@ -296,7 +296,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "legaldocInput" ] [ text "Please provide Legal documents where applicable" ]
+        [ label [ for "legaldocInput" ] [ text "Please provide Legal documents where applicable:" ]
         , textarea
           [ id "legaldocInput"
           , class "form-control"
@@ -357,7 +357,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "publishStoryRadio" ] [ text "Is it safe for Free Press unlimited to publish about your story? If yes, we will contact to discuss." ]
+        [ label [ for "publishStoryRadio" ] [ text "Is it safe for Free Press Unlimited to publish about your story? If yes, we will contact to discuss:" ]
         , br [ ] [ ]
         , input
           [ class "form-radio"
