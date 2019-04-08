@@ -32,7 +32,7 @@ type Descriptor
   | Needs String
   | Support String
   | References String
-  | Legaldoc String
+  | Documents String
   -- Contact
   | ContactMethod String
   | PublishStory String
@@ -57,7 +57,7 @@ type Model = Model
   , needs : String
   , support : String
   , references : String
-  , legaldoc : String
+  , documents : String
   -- Contact
   , contactMethod : String
   , publishStory : String
@@ -98,8 +98,8 @@ update desc (Model model) =
       Model { model | support = val }
     References val ->
       Model { model | references = val }
-    Legaldoc val ->
-      Model { model | legaldoc = val }
+    Documents val ->
+      Model { model | documents = val }
     -- Contact
     ContactMethod val ->
       Model { model | contactMethod = val }
@@ -268,7 +268,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "supportInput" ] [ text "Have you applied for support from other organisations? If yes, which ones?" ]
+        [ label [ for "supportInput" ] [ text "Have you applied for support from other organizations? If yes, which ones?" ]
         , textarea
           [ id "supportInput"
           , class "form-control"
@@ -294,12 +294,12 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "legaldocInput" ] [ text "Please provide Legal documents where applicable:" ]
+        [ label [ for "documentInput" ] [ text "Please provide documents where applicable:" ]
         , textarea
-          [ id "legaldocInput"
+          [ id "documentInput"
           , class "form-control"
-          , value model.legaldoc
-          , onInput Legaldoc
+          , value model.documents
+          , onInput Documents
           ] [ ]
         ]
       ]
@@ -412,7 +412,7 @@ init = Model
   , needs = ""
   , support = ""
   , references = ""
-  , legaldoc = ""
+  , documents = ""
   -- Contact
   , contactMethod = ""
   , publishStory = ""
@@ -432,7 +432,7 @@ ready ( Model model ) =
   -- && (String.length model.needs) /= 0
   -- && (String.length model.support) /= 0
   -- && (String.length model.references) /= 0
-  -- && (String.length model.legaldoc) /= 0
+  -- && (String.length model.documents) /= 0
   -- Contact methods
   -- && (String.length model.contactMethod) /= 0
   -- && (String.length model.publishStory) /= 0
@@ -457,7 +457,7 @@ serialize ( Model model ) =
     , "**What he/she needs and why (incl. budget)**", crlf, model.needs, crlf, crlf
     , "**Has applied for support from other organisations?**", crlf, model.support, crlf, crlf
     , "**At least two references that can confirm the story**", crlf, model.references, crlf, crlf
-    , "**Legal documents**", crlf, model.legaldoc, crlf, crlf
+    , "**Documents**", crlf, model.documents, crlf, crlf
     -- Contact
     , "**Contact Method**", crlf, model.contactMethod, crlf, crlf
     , "**Safe to Publish Story?**", crlf, model.publishStory, crlf, crlf
