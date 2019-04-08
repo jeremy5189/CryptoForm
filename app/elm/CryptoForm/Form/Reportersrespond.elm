@@ -268,7 +268,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "supportInput" ] [ text "Have you applied for support from other organisations? If yes, which ones?" ]
+        [ label [ for "supportInput" ] [ text "Have you applied for support from other organizations? If yes, which ones?" ]
         , textarea
           [ id "supportInput"
           , class "form-control"
