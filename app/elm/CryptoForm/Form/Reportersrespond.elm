@@ -32,6 +32,11 @@ type Descriptor
   | Needs String
   | Support String
   | References String
+  | Legaldoc String
+  -- Contact
+  | ContactMethod String
+  | PublishStory String
+  | PGPKey String
 
 
 
@@ -52,6 +57,11 @@ type Model = Model
   , needs : String
   , support : String
   , references : String
+  , legaldoc : String
+  -- Contact
+  , contactMethod : String
+  , publishStory : String
+  , pgpKey : String
   }
 
 
@@ -88,6 +98,15 @@ update desc (Model model) =
       Model { model | support = val }
     References val ->
       Model { model | references = val }
+    Legaldoc val ->
+      Model { model | legaldoc = val }
+    -- Contact
+    ContactMethod val ->
+      Model { model | contactMethod = val }
+    PublishStory val ->
+      Model { model | publishStory = val }
+    PGPKey val ->
+      Model { model | pgpKey = val }
 
 
 view : Model -> Html Descriptor
@@ -120,7 +139,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "dateofBirthInput" ] [ text "Date of Birth" ]
+        [ label [ for "dateofBirthInput" ] [ text "Date of Birth(*)" ]
         , input
           [ id "dateofBirthInput"
           , class "form-control"
@@ -137,7 +156,6 @@ view ( Model model ) =
           , class "form-control"
           , type_ "text"
           , value model.sex
-          , placeholder "required"
           , onInput Sex
           ] [ ]
         ]
@@ -146,7 +164,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "nationalityInput" ] [ text "Nationality" ]
+        [ label [ for "nationalityInput" ] [ text "Nationality(*)" ]
         , input
           [ id "nationalityInput"
           , class "form-control"
@@ -157,7 +175,7 @@ view ( Model model ) =
           ] [ ]
         ]
       , div [ class "col-sm" ]
-        [ label [ for "locationInput" ] [ text "Current location" ]
+        [ label [ for "locationInput" ] [ text "Current location(*)" ]
         , input
           [ id "locationInput"
           , class "form-control"
@@ -172,7 +190,7 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "professionInput" ] [ text "Profession" ]
+        [ label [ for "professionInput" ] [ text "Profession(*)" ]
         , input
           [ id "professionInput"
           , class "form-control"
@@ -189,7 +207,6 @@ view ( Model model ) =
           , class "form-control"
           , type_ "text"
           , value model.workplace
-          , placeholder "required"
           , onInput Workplace
           ] [ ]
         ]
@@ -198,12 +215,11 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "experienceInput" ] [ text "List of previous employers" ]
+        [ label [ for "experienceInput" ] [ text "List of current employers:" ]
         , textarea
           [ id "experienceInput"
           , class "form-control"
           , value model.experience
-          , placeholder "required"
           , onInput Experience
           ] [ ]
         ]
@@ -212,12 +228,11 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "evidenceInput" ] [ text "Provide evidence of your work as a media worker (links) or upload material underneath" ]
+        [ label [ for "evidenceInput" ] [ text "Provide evidence of your work as a media worker (links) or upload material underneath:" ]
         , textarea
           [ id "experienceInput"
           , class "form-control"
           , value model.evidence
-          , placeholder "required"
           , onInput Evidence
           ] [ ]
         ]
@@ -225,20 +240,13 @@ view ( Model model ) =
     ]
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
-      [ legend [ class "col-12" ] [ text "Application details" ]
+      [ legend [ class "col-12" ] [ text "Describe the events that resulted in your current situation" ]
       , div [ class "col-sm" ]
-        [ label [ for "reasonsInput" ]
-          [ text "What are your reasons for applying to reporters Respond?"
-          , ul [ ]
-            [ li [ ] [ text "Describe the events that resulted in your current situation" ]
-            , li [ ] [ text "Describe your current situation in some detail" ]
-            ]
-          ]
+        [ label [ for "reasonsInput" ] [ text "Describe your current situation in some detail:"]
         , textarea
           [ id "reasonsInput"
           , class "form-control"
           , value model.reasons
-          , placeholder "required"
           , onInput Reasons
           ] [ ]
         ]
@@ -247,12 +255,11 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "needsInput" ] [ text "Please tell us what you need and why. Also provide a budget." ]
+        [ label [ for "needsInput" ] [ text "Please tell us what you need and why. Also provide a budget breakdown:" ]
         , textarea
           [ id "needsInput"
           , class "form-control"
           , value model.needs
-          , placeholder "required"
           , onInput Needs
           ] [ ]
         ]
@@ -266,7 +273,6 @@ view ( Model model ) =
           [ id "supportInput"
           , class "form-control"
           , value model.support
-          , placeholder "required"
           , onInput Support
           ] [ ]
         ]
@@ -275,13 +281,112 @@ view ( Model model ) =
   , fieldset [ class "form-group" ]
     [ div [ class "row" ]
       [ div [ class "col-sm"]
-        [ label [ for "referencesInput" ] [ text "Please provide at least two references that can confirm your story. Include contact details if possible." ]
+        [ label [ for "referencesInput" ] [ text "Please provide at least two references that can confirm your story. Include contact details:" ]
         , textarea
           [ id "referencesInput"
           , class "form-control"
           , value model.references
-          , placeholder "required"
           , onInput References
+          ] [ ]
+        ]
+      ]
+    ]
+  , fieldset [ class "form-group" ]
+    [ div [ class "row" ]
+      [ div [ class "col-sm"]
+        [ label [ for "legaldocInput" ] [ text "Please provide Legal documents where applicable:" ]
+        , textarea
+          [ id "legaldocInput"
+          , class "form-control"
+          , value model.legaldoc
+          , onInput Legaldoc
+          ] [ ]
+        ]
+      ]
+    ]
+  , fieldset [ class "form-group" ]
+    [ div [ class "row" ]
+      [ div [ class "col-sm"]
+        [ label [ for "contactMethodRadio" ] [ text "Notice that all the information that you have submitted is sent through our secure, (SSL) encrypted channel. Please choose how you like to be contacted by us:" ]
+        , br [ ] [ ]
+        , input
+          [ class "form-radio"
+          , style [ ("margin", "0 10px 0 10px") ]
+          , type_ "radio"
+          , value "E-mail"
+          , name "contactMethod"
+          , onInput ContactMethod
+          ] [ ]
+        , label [ ] [ text "E-mail" ]
+        , br [ ] [ ]
+        , input
+          [ class "form-radio"
+          , style [ ("margin", "0 10px 0 10px") ]
+          , type_ "radio"
+          , value "Encrypted e-mail"
+          , name "contactMethod"
+          , onInput ContactMethod
+          ] [ ]
+        , label [ ] [ text "Encrypted e-mail (please add your public key)" ]
+        , br [ ] [ ]
+        , input
+          [ class "form-radio"
+          , style [ ("margin", "0 10px 0 10px") ]
+          , type_ "radio"
+          , value "Wire"
+          , name "contactMethod"
+          , onInput ContactMethod
+          ] [ ]
+        , label [ ] [ text "Wire" ]
+        , br [ ] [ ]
+        , input
+          [ class "form-radio"
+          , style [ ("margin", "0 10px 0 10px") ]
+          , type_ "radio"
+          , value "Signal"
+          , name "contactMethod"
+          , onInput ContactMethod
+          ] [ ]
+        , label [ ] [ text "Signal" ]
+        ]
+      ]
+    ]
+  , fieldset [ class "form-group" ]
+    [ div [ class "row" ]
+      [ div [ class "col-sm"]
+        [ label [ for "publishStoryRadio" ] [ text "Is it safe for Free Press Unlimited to publish about your story? If yes, we will contact to discuss:" ]
+        , br [ ] [ ]
+        , input
+          [ class "form-radio"
+          , style [ ("margin", "0 10px 0 10px") ]
+          , type_ "radio"
+          , value "No"
+          , name "publishStory"
+          , onInput PublishStory
+          ] [ ]
+        , label [ ] [ text "No" ]
+        , br [ ] [ ]
+        , input
+          [ class "form-radio"
+          , style [ ("margin", "0 10px 0 10px") ]
+          , type_ "radio"
+          , value "Yes"
+          , name "publishStory"
+          , onInput PublishStory
+          ] [ ]
+        , label [ ] [ text "Yes" ]
+        ]
+      ]
+    ]
+    , fieldset [ class "form-group" ]
+    [ div [ class "row" ]
+      [ div [ class "col-sm"]
+        [ label [ for "pgpKeyInput" ] [ text "Please provide your public PGP key if applicable:" ]
+        , textarea
+          [ id "pgpKeyInput"
+          , class "form-control"
+          , value model.pgpKey
+          , onInput PGPKey
           ] [ ]
         ]
       ]
@@ -307,6 +412,11 @@ init = Model
   , needs = ""
   , support = ""
   , references = ""
+  , legaldoc = ""
+  -- Contact
+  , contactMethod = ""
+  , publishStory = ""
+  , pgpKey = ""
   }
 
 
@@ -314,17 +424,18 @@ ready : Model -> Bool
 ready ( Model model ) =
   True
   && (String.length model.dateofBirth) /= 0
-  && (String.length model.sex) /= 0
   && (String.length model.nationality) /= 0
   && (String.length model.location) /= 0
   && (String.length model.profession) /= 0
-  && (String.length model.workplace) /= 0
-  && (String.length model.experience) /= 0
-  && (String.length model.reasons) /= 0
-  && (String.length model.evidence) /= 0
-  && (String.length model.needs) /= 0
-  && (String.length model.support) /= 0
-  && (String.length model.references) /= 0
+  -- Textareas
+  -- && (String.length model.reasons) /= 0
+  -- && (String.length model.needs) /= 0
+  -- && (String.length model.support) /= 0
+  -- && (String.length model.references) /= 0
+  -- && (String.length model.legaldoc) /= 0
+  -- Contact methods
+  -- && (String.length model.contactMethod) /= 0
+  -- && (String.length model.publishStory) /= 0
 
 
 serialize : Model -> String
@@ -339,11 +450,16 @@ serialize ( Model model ) =
     , "**Current location**", crlf, model.location, crlf, crlf
     , "**Profession**", crlf, model.profession, crlf, crlf
     , "**Workplace**", crlf, model.workplace, crlf, crlf
-    , "**List of previous employers**", crlf, model.experience, crlf, crlf
+    , "**List of current employers**", crlf, model.experience, crlf, crlf
     , "**Evidence of work as a media worker**", crlf, model.evidence, crlf, crlf
     -- Case information
-    , "**Reasons for applying**", crlf, model.reasons, crlf, crlf
+    , "**Current situation**", crlf, model.reasons, crlf, crlf
     , "**What he/she needs and why (incl. budget)**", crlf, model.needs, crlf, crlf
     , "**Has applied for support from other organisations?**", crlf, model.support, crlf, crlf
     , "**At least two references that can confirm the story**", crlf, model.references, crlf, crlf
+    , "**Legal documents**", crlf, model.legaldoc, crlf, crlf
+    -- Contact
+    , "**Contact Method**", crlf, model.contactMethod, crlf, crlf
+    , "**Safe to Publish Story?**", crlf, model.publishStory, crlf, crlf
+    , "**PGP Key**", crlf, model.pgpKey, crlf, crlf
     ]
